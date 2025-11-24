@@ -7,9 +7,6 @@ typedef struct process {
 	int memory_given;
 } process;
 
-int init_process(process *p, unsigned int pid) {
-	p->pid = pid;
-	p->memory_given = FALSE;
-}
+int init_process(process *p, unsigned int pid);
 
 
