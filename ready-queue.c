@@ -5,44 +5,45 @@ void init_queue(queue *q) {
 	q->head = NULL;
 }
 
-int is_empty(queue *q) {
-	return q->head == NULL;
+void free_queue(queue *q) {
+	node *tmp;
+	while (q->head != NULL) {
+		tmp = q->head;
+		q->head = q->head->next;
+		free(tmp);
+	}
+	q->t = NULL;
 }
 
 int enqueue(queue *q, process p) {
-	if (!p.memory_given) {
-		printf("Memory not given to process");
-		return 0;
-	}
-
-	node *new_node = malloc(sizeof(node));
+	node *new_node = (node*)malloc(sizeof(node));
 	new_node->data = p;
 	new_node->next = NULL;
 
 	if (q->tail == NULL) {
 		q->head = q->tail = new_node;
-		return 1;
+		return -1;
 	}
 
 	q->tail->next = new_node;
 	q->tail = new_node;
-	return 1;
+	return 0;
 }
 
-int dequeue(queue *q) {
-	if (is_empty(q)) {
-		return 0;
+int dequeue(queue *q, process *p) {
+	if (q->tail == NULL) {
+		printf("The Ready Queue is empty\n");
+		return -1;
 	}
 
+	*process = q->tail->data;
 	node *tmp = q->head;
-
 	q->head = q->head->next;
 	if (q->head == NULL) {
 		q->tail = NULL;
 	}
-
 	free(tmp);
-	return 1;
+	return 0;
 }
 
 void display_queue(queue *q) {
