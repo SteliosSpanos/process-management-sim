@@ -38,7 +38,7 @@ int dequeue(queue *q, process *p) {
 		return -1;
 	}
 
-	*p = q->tail->data;
+	*p = q->head->data;
 	node *tmp = q->head;
 	q->head = q->head->next;
 	if (q->head == NULL) {
